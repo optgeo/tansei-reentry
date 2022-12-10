@@ -32,6 +32,8 @@ fetch(URL, {method:"HEAD"}).then(resp => {
   })
 
   const map = new maplibregl.Map({
+    center: [137.889404, 35.218697],
+    zoom: 13,
     maxZoom: 16,
     container: 'map',
     hash: true,
@@ -49,7 +51,11 @@ fetch(URL, {method:"HEAD"}).then(resp => {
         {
           type: 'fill',
           source: 'grid',
-          'source-layer': 'grid'
+          'source-layer': 'grid',
+          layout: {
+          },
+          paint: {
+          }
         }
       ]
     }
