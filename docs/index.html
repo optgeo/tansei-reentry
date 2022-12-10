@@ -19,17 +19,16 @@ body { margin: 0; }
 <div id="map"></div>
 <div id="overlay">
 <script type="text/javascript">
-let protocol = new pmtiles.Protocol();
-maplibregl.addProtocol("pmtiles",protocol.tile);
+let protocol = new pmtiles.Protocol()
+maplibregl.addProtocol("pmtiles",protocol.tile)
 
-let URL = "https://optgeo.github.io/tansei-reentry/tiles.pmtiles";
+let URL = "https://optgeo.github.io/tansei-reentry/tiles.pmtiles"
 
 function formatBytes(a,b=2){if(!+a)return"0 Bytes";const c=0>b?0:b,d=Math.floor(Math.log(a)/Math.log(1024));return`${parseFloat((a/Math.pow(1024,d)).toFixed(c))} ${["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"][d]}`}
 
 fetch(URL, {method:"HEAD"}).then(resp => {
-  let length = resp.headers.get("Content-Length");
-  document.getElementById("overlay").innerHTML = `<a href="${URL}">${URL}</a> (${formatBytes(length)})`;
-  })
+  let length = resp.headers.get("Content-Length")
+  document.getElementById("overlay").innerHTML = `<a href="${URL}">${URL}</a> (${formatBytes(length)})`
 
   const map = new maplibregl.Map({
     center: [137.889404, 35.218697],
@@ -37,29 +36,9 @@ fetch(URL, {method:"HEAD"}).then(resp => {
     maxZoom: 16,
     container: 'map',
     hash: true,
-    style: {
-      version:8,
-      glyphs:'https://cdn.protomaps.com/fonts/pbf/{fontstack}/{range}.pbf',
-      sources: {
-        "grid": {
-          type: "vector",
-          url: "pmtiles://" + URL,
-          attribution: 'Virtual Shizuoka'
-        }
-      },
-      layers: [
-        {
-          type: 'fill',
-          source: 'grid',
-          'source-layer': 'grid',
-          layout: {
-          },
-          paint: {
-          }
-        }
-      ]
-    }
-  });
+    style: 'style.json'
+  })
+})
 </script>
 </body>
 </html>
