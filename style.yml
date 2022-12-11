@@ -75,9 +75,8 @@ sources:
     type: vector
     minzoom: 8
     maxzoom: 14
-    tiles:
-      - >-
-        pmtiles://https://optgeo.github.io/tansei-reentry/tiles.pmtiles
+    url: >-
+      pmtiles://https://optgeo.github.io/tansei-reentry/tiles.pmtiles
     attribution: Virtual Shizuoka
 
 # --- layers --- #
@@ -198,6 +197,13 @@ layers:
   - !!inc/file layers/strctline.yml
   - !!inc/file layers/pwrtrnsml.yml
   - !!inc/file layers/pwrtrnsml-dash.yml
+  - id: grid
+    type: fill
+    source: grid
+    'source-layer': grid
+    paint: 
+      'fill-color': '#5b92e5'
+      'fill-opacity': 0.5
 # annotations and symbols
   - !!inc/file layers/anno-symbol-allow-overlap.yml
   - !!inc/file layers/anno-route-number.yml
@@ -279,8 +285,4 @@ layers:
   - !!inc/file layers/m3232.yml
   - !!inc/file layers/m3243.yml
   - !!inc/file layers/m6331.yml
-  - id: grid
-    type: fill
-    source: grid
-    'source-layer': grid
 

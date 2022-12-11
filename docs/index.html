@@ -38,6 +38,64 @@ fetch(URL, {method:"HEAD"}).then(resp => {
     hash: true,
     style: 'style.json'
   })
+
+  let hovers = []
+  const N = 2
+  map.on('mousemove', (e) => {
+    let features = map.queryRenderedFeatures(e.point, {
+      layers: ['grid']
+    })
+    mouseout()
+    let n = 0
+    for (f of features) {
+      mouseover(f)
+      n++
+      if (n == N) break
+    }
+  })
+  map.on('mouseout', (e) => {
+    mouseout()
+  })
+  map.on('click', (e) => {
+    for (f of hovers) {
+      const url = `https://viewer.copc.io/?copc=` +
+        `https://x.optgeo.org/tansei3/` +
+        `${f.properties.grid}.copc.laz`
+      window.open(url, '_blank')
+    }
+  })
+  map.on('contextmenu', (e) => {
+    for (f of hovers) {
+      const url = 
+        `https://x.optgeo.org/tansei3/` +
+        `${f.properties.grid}.copc.laz`
+      window.open(url, '_blank')
+    }
+  })
+  mouseout = () => {
+    for (f of hovers) {
+      map.getCanvasContainer().style.cursor = 'default'
+      map.setFeatureState({
+        source: f.source,
+        sourceLayer: f.sourceLayer,
+        id: f.properties.grid
+      }, {
+        hover: false
+      })
+    }
+    hovers = []
+  }
+  mouseover = (f) => {
+    hovers.push(f)
+    map.getCanvasContainer().style.cursor = 'pointer'
+    map.setFeatureState({
+      source: f.source,
+      sourceLayer: f.sourceLayer,
+      id: f.properties.grid
+    }, {
+      hover: true
+    })
+  }
 })
 </script>
 </body>
