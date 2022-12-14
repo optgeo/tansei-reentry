@@ -1,7 +1,7 @@
 require 'lmdb'
 require 'json'
 
-db = LMDB.new('extents').database
+db = LMDB.new('extents', :mapsize => 1099511627776).database
 
 count = db.size
 $stderr.print "initial db size is #{count}.\n"
