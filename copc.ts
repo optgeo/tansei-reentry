@@ -7,7 +7,13 @@ const server = Deno.env.get('SERVER')
 for await (let fn of readLines(Deno.stdin)) {
   const url = `${server}/${fn}`
   // console.error(`Processing ${fn}...`)
-  const copc = await Copc.create(url)
+  let copc = false
+  try {
+    copc = await Copc.create(url)
+  } catch (e) {
+    console.error(e)
+  }
+  if (!copc) continue
   const min = proj4(copc.wkt).inverse(copc.header.min)
   const max = proj4(copc.wkt).inverse(copc.header.max)
   const f = {

@@ -2,7 +2,7 @@ desc 'Extract COPC metadata'
 task :default do
   while true
     sh <<-EOS
-TARGET=godo32/tansei \
+TARGET=godo31/tansei \
 ruby list.rb | ruby filter.rb | \
 SERVER=http://tansei21.optgeo.org:10031 \
 deno run --allow-read --allow-sys --allow-net --allow-env copc.ts | \
