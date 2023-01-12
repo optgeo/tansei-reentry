@@ -34,3 +34,16 @@ charites build style.yml docs/style.json
   EOS
 end
 
+desc 'download js/css files'
+task :mirror do
+  urls = %w{
+https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css
+https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js
+https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js.map
+https://unpkg.com/pmtiles@2.4.0/dist/index.js
+  }
+  urls.each {|url|
+    cmd = "curl -o docs/#{url.split('/')[-1]} #{url}"
+    system cmd
+  }
+end

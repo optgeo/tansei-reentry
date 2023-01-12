@@ -1,5 +1,5 @@
 require 'lmdb'
-SLEEP = 5
+SLEEP = 1
 
 db = LMDB.new('extents').database
 
@@ -9,7 +9,7 @@ while gets
     $stderr.print "skip #{grid} because already recorded.\r"
   else
     print $_
-    $stderr.print "Sleeping #{SLEEP} sec after sending #{grid}\r"
+    ## $stderr.print "filter sleeping #{SLEEP} sec after sending #{grid}\r"
     sleep(SLEEP) ##
   end
 end
