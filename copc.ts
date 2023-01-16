@@ -3,7 +3,7 @@ import { Copc } from 'npm:copc'
 import proj4 from 'npm:proj4'
 import { sleep } from "https://deno.land/x/sleep/mod.ts"
 
-const SLEEP = 120
+const SLEEP = 45
 const server = Deno.env.get('SERVER')
 
 for await (let fn of readLines(Deno.stdin)) {
